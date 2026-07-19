@@ -437,14 +437,31 @@
   }
   .video-thumb{
     aspect-ratio:16/9;
-    background:linear-gradient(135deg, var(--teal-deep), var(--teal-mid));
+    background-color:var(--teal-deep);
+    background-image:linear-gradient(135deg, var(--teal-deep), var(--teal-mid));
+    background-size:cover;
+    background-position:center;
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     position:relative;
   }
-  .video-thumb svg{width:42px; height:42px; opacity:0.9;}
+  .video-thumb::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(18,59,58,0.15);
+    transition:background 0.2s ease;
+  }
+  .video-card a:hover .video-thumb::before{background:rgba(18,59,58,0.35);}
+  .video-thumb svg{
+    width:42px; height:42px;
+    opacity:0.95;
+    position:relative;
+    z-index:1;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+  }
   .video-card .body{padding:16px 18px;}
   .video-card h3{font-size:0.98rem; margin-bottom:4px;}
   .video-card p{font-size:0.82rem; color:var(--ink-soft); margin:0;}
@@ -746,25 +763,29 @@
     </div>
     <div class="video-grid">
       <div class="video-card">
-        <a href="#" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
-          <div class="video-thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <a href="https://www.youtube.com/watch?v=bzSa3NrFCbk" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/bzSa3NrFCbk/hqdefault.jpg');">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
           <div class="body">
             <h3>Antibiotic resistance</h3>
-            <p>Coming soon.....</p>
+            <p>Why finishing your course matters — Kreol Morisien.</p>
           </div>
         </a>
       </div>
       <div class="video-card">
-        <a href="#" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
-          <div class="video-thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <a href="https://www.youtube.com/watch?v=SkvSBg9DWJY" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+          <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/SkvSBg9DWJY/hqdefault.jpg');">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
           <div class="body">
             <h3>Hepatitis awareness</h3>
-            <p>Coming soon.....</p>
+            <p>What to know — Kreol Morisien.</p>
           </div>
         </a>
       </div>
       <div class="video-card">
-        <a href="#" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <a href="https://www.youtube.com/@draslamjoorawon" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
           <div class="video-thumb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="body">
             <h3>More topics soon</h3>
@@ -773,7 +794,7 @@
         </a>
       </div>
     </div>
-    <p class="video-note">xyz</p>
+    <p class="video-note">More videos coming — send new YouTube links any time and they'll be added the same way.</p>
   </div>
 </section>
 
