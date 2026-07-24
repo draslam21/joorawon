@@ -344,8 +344,23 @@
   @media (max-width:540px){.service-grid{grid-template-columns:1fr;}}
   .service-cell{
     background:var(--card);
-    padding:26px 22px;
+    padding:24px 22px;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
   }
+  .service-icon{
+    flex-shrink:0;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--paper-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--teal-deep);
+  }
+  .service-icon svg{width:20px; height:20px;}
   .service-cell h3{
     font-size:1.02rem;
     margin-bottom:0.35em;
@@ -465,6 +480,32 @@
   .video-card .body{padding:16px 18px;}
   .video-card h3{font-size:0.98rem; margin-bottom:4px;}
   .video-card p{font-size:0.82rem; color:var(--ink-soft); margin:0;}
+  .watch-on{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:12px 18px 16px;
+  }
+  .watch-on-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    margin-right:2px;
+  }
+  .watch-on a{
+    font-size:0.76rem;
+    font-weight:600;
+    text-decoration:none;
+    color:var(--teal-deep);
+    background:var(--paper-deep);
+    padding:4px 10px;
+    border-radius:20px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .watch-on a:hover{background:var(--brass); color:#fff;}
   .video-note{
     margin-top:20px;
     font-size:0.85rem;
@@ -697,15 +738,42 @@
       <p>General internal medicine consultations, with particular depth in the areas below. If you're unsure whether your concern fits, message directly and ask.</p>
     </div>
     <div class="service-grid">
-      <div class="service-cell"><h3>Infectious diseases</h3><p>Assessment and management of infections, including antibiotic stewardship guidance.</p></div>
-      <div class="service-cell"><h3>Rheumatological conditions</h3><p>Joint pain, inflammatory and autoimmune conditions, gout.</p></div>
-      <div class="service-cell"><h3>Diabetes</h3><p>Diagnosis, monitoring, and long-term management.</p></div>
-      <div class="service-cell"><h3>Hypertension</h3><p>Blood pressure assessment and ongoing control.</p></div>
-      <div class="service-cell"><h3>Asthma &amp; chest disease</h3><p>Respiratory assessment and chronic care.</p></div>
-      <div class="service-cell"><h3>Neurological disorders</h3><p>Evaluation and management of common neurological complaints.</p></div>
-      <div class="service-cell"><h3>Gastrointestinal disease</h3><p>Digestive symptoms and chronic GI conditions.</p></div>
-      <div class="service-cell"><h3>General consultations</h3><p>Comprehensive check-ups and second opinions.</p></div>
-      <div class="service-cell"><h3>Home visits</h3><p>Available by appointment for patients unable to travel to clinic.</p></div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="2.5" x2="12" y2="5.5"/><line x1="12" y1="18.5" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5.5" y2="12"/><line x1="18.5" y1="12" x2="21.5" y2="12"/><line x1="5.3" y1="5.3" x2="7.4" y2="7.4"/><line x1="16.6" y1="16.6" x2="18.7" y2="18.7"/><line x1="5.3" y1="18.7" x2="7.4" y2="16.6"/><line x1="16.6" y1="7.4" x2="18.7" y2="5.3"/></svg></div>
+        <div><h3>Infectious diseases</h3><p>Assessment and management of infections, including antibiotic stewardship guidance.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><line x1="8.2" y1="15.8" x2="15.8" y2="8.2"/></svg></div>
+        <div><h3>Rheumatological conditions</h3><p>Joint pain, inflammatory and autoimmune conditions, gout.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7.2 6 11.2a6 6 0 1 1-12 0C6 10.2 12 3 12 3z"/></svg></div>
+        <div><h3>Diabetes</h3><p>Diagnosis, monitoring, and long-term management.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3.5l1.8-5 3 10 2-8.5 1.5 3.5H21"/></svg></div>
+        <div><h3>Hypertension</h3><p>Blood pressure assessment and ongoing control.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6.5"/><path d="M12 10c-1.2-2.2-5.6-2.4-6.7.3-1.1 2.8-.4 8 1.4 9.2 1.5 1 2.8-.3 2.8-2v-4"/><path d="M12 10c1.2-2.2 5.6-2.4 6.7.3 1.1 2.8.4 8-1.4 9.2-1.5 1-2.8-.3-2.8-2v-4"/></svg></div>
+        <div><h3>Asthma &amp; chest disease</h3><p>Respiratory assessment and chronic care.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4a3 3 0 0 0-3 3 3 3 0 0 0-1.2 5.7A3 3 0 0 0 8 17.5a3 3 0 0 0 3.5-3V7a3 3 0 0 0-2-3z"/><path d="M14.5 4a3 3 0 0 1 3 3 3 3 0 0 1 1.2 5.7A3 3 0 0 1 16 17.5a3 3 0 0 1-3.5-3V7a3 3 0 0 1 2-3z"/></svg></div>
+        <div><h3>Neurological disorders</h3><p>Evaluation and management of common neurological complaints.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3.5a3.5 3.5 0 0 0 3.5 3.5 3.5 3.5 0 0 1 3.5 3.5v1a5 5 0 0 1-5 5c-2.8 0-4.8-1.7-5-4"/></svg></div>
+        <div><h3>Gastrointestinal disease</h3><p>Digestive symptoms and chronic GI conditions.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5v5.5a4 4 0 0 0 8 0V3.5"/><path d="M9 14v1.5a5 5 0 0 0 10 0V13.5"/><circle cx="19" cy="9.5" r="2"/></svg></div>
+        <div><h3>General consultations</h3><p>Comprehensive check-ups and second opinions.</p></div>
+      </div>
+      <div class="service-cell">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 10v8.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V10"/><path d="M9.5 19.5V14h5v5.5"/></svg></div>
+        <div><h3>Home visits</h3><p>Available by appointment for patients unable to travel to clinic.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -767,22 +835,34 @@
           <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/bzSa3NrFCbk/hqdefault.jpg');">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <div class="body">
+          <div class="body" style="padding-bottom:0;">
             <h3>Antibiotic resistance</h3>
             <p>Why finishing your course matters — Kreol Morisien.</p>
           </div>
         </a>
+        <div class="watch-on">
+          <span class="watch-on-label">Watch on:</span>
+          <a href="https://www.youtube.com/watch?v=bzSa3NrFCbk" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.facebook.com/reel/3461053390728879" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.tiktok.com/@drjoorawon/video/7664307584953912596" target="_blank" rel="noopener">TikTok</a>
+        </div>
       </div>
       <div class="video-card">
         <a href="https://www.youtube.com/watch?v=SkvSBg9DWJY" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
           <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/SkvSBg9DWJY/hqdefault.jpg');">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <div class="body">
+          <div class="body" style="padding-bottom:0;">
             <h3>Hepatitis awareness</h3>
             <p>What to know — Kreol Morisien.</p>
           </div>
         </a>
+        <div class="watch-on">
+          <span class="watch-on-label">Watch on:</span>
+          <a href="https://www.youtube.com/watch?v=SkvSBg9DWJY" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.facebook.com/reel/1550212200176763" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.tiktok.com/@drjoorawon/video/7664308720125365525" target="_blank" rel="noopener">TikTok</a>
+        </div>
       </div>
       <div class="video-card">
         <a href="https://www.youtube.com/@draslamjoorawon6558" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
