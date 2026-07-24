@@ -193,7 +193,7 @@ main.index h1 {
   margin-bottom: 3rem;
   scroll-margin-top: 1.5rem;
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 227px 1fr;
   gap: 2.5rem;
   align-items: start;
 }
@@ -208,7 +208,8 @@ main.index h1 {
   top: 90px;
   border-radius: var(--radius);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  width: 227px;
+  aspect-ratio: 1 / 1;
   background: var(--paper-deep);
 }
 
