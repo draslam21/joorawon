@@ -39,8 +39,6 @@ h1, h2, h3, .brand-text { font-family: 'Fraunces', serif; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .site-header .brand {
@@ -80,16 +78,17 @@ h1, h2, h3, .brand-text { font-family: 'Fraunces', serif; }
 
 .site-header nav {
   display: flex;
-  gap: 26px;
-  flex-wrap: wrap;
+  gap: 20px;
+  flex-wrap: nowrap;
 }
 
 .site-header nav a {
   color: var(--ink);
   text-decoration: none;
   font-family: 'Work Sans', sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 500;
+  white-space: nowrap;
   margin-left: 0;
   border-bottom: 1px solid transparent;
   padding-bottom: 2px;
@@ -400,7 +399,12 @@ main.index h1 {
 .site-footer a { color: #cfe0d9; text-decoration: none; }
 .site-footer .fine { opacity: 0.7; margin-top: 10px; font-size: 0.76rem; }
 
+@media (max-width: 900px) {
+  .nav-inner { flex-wrap: wrap; row-gap: 10px; }
+  .site-header nav { flex-wrap: wrap; row-gap: 8px 16px; }
+}
+
 @media (max-width: 480px) {
-  .site-header nav a { margin-left: 0.7rem; font-size: 0.82rem; }
+  .site-header nav a { font-size: 0.82rem; }
   main.post h1 { font-size: 1.5rem; }
 }
