@@ -255,7 +255,7 @@
     padding:8px;
     box-shadow: 0 10px 30px rgba(11,27,51,0.16);
   }
-  .bar a{
+  .bar a, .bar button{
     flex:1;
     display:flex; align-items:center; justify-content:center; gap:7px;
     text-decoration:none;
@@ -265,11 +265,130 @@
     border-radius:100px;
     transition: transform 0.15s ease;
   }
-  .bar a:active{ transform:scale(0.95); }
-  .bar a svg{ width:16px; height:16px; }
+  .bar a:active, .bar button:active{ transform:scale(0.95); }
+  .bar a svg, .bar button svg{ width:16px; height:16px; }
   .bar .call{ background:var(--navy); color:#fff; }
   .bar .whats{ background:var(--whatsapp); color:#fff; }
   .bar .dir{ background:var(--teal-light); color:var(--navy); }
+  .bar .rdv{ background:var(--teal); color:#fff; border:none; font-family:'IBM Plex Sans', sans-serif; cursor:pointer; }
+
+  /* ---------- BOOK APPOINTMENT ---------- */
+  .rdv-wrap{ padding: 22px 24px 4px; }
+  .rdv-btn{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    background: linear-gradient(135deg, var(--teal) 0%, #176e6e 100%);
+    color:#fff;
+    border:none;
+    border-radius:var(--radius);
+    padding:16px 18px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15.5px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow: 0 8px 20px rgba(30,138,138,0.28);
+    transition: transform 0.15s ease;
+  }
+  .rdv-btn:active{ transform:scale(0.98); }
+  .rdv-btn svg{ width:19px; height:19px; }
+
+  .rdv-overlay{
+    position:fixed; inset:0;
+    background:rgba(11,27,51,0.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+    padding:0;
+  }
+  .rdv-overlay.open{ display:flex; }
+  @media (min-width:520px){
+    .rdv-overlay{ align-items:center; }
+  }
+  .rdv-modal{
+    background:var(--paper);
+    width:100%;
+    max-width:480px;
+    max-height:85vh;
+    overflow-y:auto;
+    border-radius:22px 22px 0 0;
+    padding:26px 22px 28px;
+    position:relative;
+    animation: rdvUp 0.28s cubic-bezier(.2,.8,.2,1);
+  }
+  @media (min-width:520px){
+    .rdv-modal{ border-radius:22px; }
+  }
+  @keyframes rdvUp{ from{ transform:translateY(30px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+  .rdv-modal-title{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-size:19px;
+    color:var(--navy);
+    margin-bottom:16px;
+    padding-right:24px;
+  }
+  .rdv-close{
+    position:absolute; top:18px; right:18px;
+    width:30px; height:30px;
+    border:none; border-radius:50%;
+    background:var(--teal-light);
+    color:var(--navy);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .rdv-option{
+    display:flex; align-items:center; justify-content:space-between;
+    width:100%;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:10px;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--navy);
+    text-align:left;
+    cursor:pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .rdv-option:active{ transform:scale(0.98); }
+  .rdv-option:hover{ border-color:var(--teal); }
+  .rdv-option .arrow{ color:var(--teal); font-size:13px; }
+  .rdv-day{
+    display:block;
+    width:100%;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:13px 16px;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--navy);
+    text-decoration:none;
+    text-align:left;
+    cursor:pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .rdv-day:active{ transform:scale(0.98); }
+  .rdv-day:hover{ border-color:var(--whatsapp); }
+  .rdv-back{
+    background:none; border:none;
+    color:var(--teal);
+    font-size:13px; font-weight:600;
+    padding:0 0 14px;
+    cursor:pointer;
+  }
+  .rdv-note{
+    font-size:12.5px;
+    color:var(--slate);
+    font-style:italic;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid var(--line);
+  }
 </style>
 </head>
 <body>
@@ -280,6 +399,20 @@
     <div class="name-fr">Spécialiste — Médecine Interne (France)</div>
     <div class="name-main">Dr Joorawon<span>Aslam</span></div>
     <div class="title-line">Diabète, hypertension, rhumatismes inflammatoires chroniques, maladies infectieuses, maladies respiratoires, épilepsie, et plus.</div>
+  </div>
+
+  <div class="rdv-wrap">
+    <button class="rdv-btn" onclick="rdvShowLocations()">
+      <svg viewBox="0 0 24 24" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Prendre rendez-vous
+    </button>
+  </div>
+
+  <div class="rdv-overlay" id="rdvOverlay" onclick="rdvClose(event)">
+    <div class="rdv-modal" onclick="event.stopPropagation()">
+      <button class="rdv-close" onclick="rdvClose()">✕</button>
+      <div id="rdvBody"></div>
+    </div>
   </div>
 
   <div class="section">
@@ -437,8 +570,52 @@
       <svg viewBox="0 0 24 24" stroke="#12294A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       Localiser
     </a>
+    <button class="rdv" onclick="rdvShowLocations()">
+      <svg viewBox="0 0 24 24" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      RDV
+    </button>
   </div>
 </div>
+
+<script>
+  const RDV_WHATSAPP = "23057408040";
+  const RDV_LOCATIONS = {
+    "Centre de Flacq": ["Lundi","Mardi","Mercredi","Vendredi","Samedi"],
+    "Rivière du Rempart": ["Jeudi 16h30"],
+    "Rose Hill": ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"]
+  };
+
+  function rdvShowLocations(){
+    const body = document.getElementById('rdvBody');
+    let html = '<div class="rdv-modal-title">Choisissez un lieu</div>';
+    Object.keys(RDV_LOCATIONS).forEach(loc => {
+      html += `<button class="rdv-option" onclick="rdvShowDays('${loc}')">${loc}<span class="arrow">›</span></button>`;
+    });
+    body.innerHTML = html;
+    document.getElementById('rdvOverlay').classList.add('open');
+  }
+
+  function rdvShowDays(location){
+    const body = document.getElementById('rdvBody');
+    let html = '<button class="rdv-back" onclick="rdvShowLocations()">‹ Retour</button>';
+    html += `<div class="rdv-modal-title">${location}<br><span style="font-family:'IBM Plex Sans',sans-serif; font-weight:500; font-size:13px; color:var(--slate);">Choisissez un jour</span></div>`;
+    RDV_LOCATIONS[location].forEach(day => {
+      html += `<a class="rdv-day" target="_blank" rel="noopener" href="${rdvBuildLink(location, day)}">${day}</a>`;
+    });
+    html += '<div class="rdv-note">Vous serez contacté(e) pour confirmer l\'heure. Merci.</div>';
+    body.innerHTML = html;
+  }
+
+  function rdvBuildLink(location, day){
+    const msg = `Bonjour Dr Joorawon, je souhaite prendre rendez-vous à ${location} - ${day}.`;
+    return `https://wa.me/${RDV_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  }
+
+  function rdvClose(evt){
+    if (evt && evt.target !== evt.currentTarget) return;
+    document.getElementById('rdvOverlay').classList.remove('open');
+  }
+</script>
 
 </body>
 </html>
