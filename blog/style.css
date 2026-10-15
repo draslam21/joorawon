@@ -457,3 +457,20 @@ main.index h1 {
   .site-header nav a { font-size: 0.82rem; }
   main.post h1 { font-size: 1.5rem; }
 }
+
+/* Comparison table inside articles */
+.post-content .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+.post-content table { width: 100%; border-collapse: collapse; font-size: .95em; }
+.post-content th, .post-content td { text-align: left; vertical-align: top; padding: 10px 12px; border: 1px solid var(--paper-deep); }
+.post-content th { background: var(--teal-deep); color: #fff; font-weight: 600; }
+.post-content tbody tr:nth-child(even) { background: rgba(255,255,255,.45); }
+@media (max-width: 600px) {
+  .post-content table, .post-content tbody, .post-content tr, .post-content td { display: block; width: 100%; }
+  .post-content thead { display: none; }
+  .post-content tr { margin-bottom: 14px; border: 1px solid var(--paper-deep); border-radius: var(--radius); overflow: hidden; }
+  .post-content td { border: 0; border-bottom: 1px solid var(--paper-deep); }
+  .post-content td:first-child { background: var(--teal-deep); color: #fff; font-size: 1.05em; }
+  .post-content td:nth-child(2)::before, .post-content td:nth-child(3)::before { display: block; font-size: .75em; letter-spacing: .06em; text-transform: uppercase; color: var(--brass-dark); margin-bottom: 4px; font-weight: 600; }
+  .post-content td:nth-child(2)::before { content: "What it means"; }
+  .post-content td:nth-child(3)::before { content: "Typical examples"; }
+}
