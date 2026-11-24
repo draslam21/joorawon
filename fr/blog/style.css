@@ -490,3 +490,10 @@ main.index h1 {
   .post-content .food-table td:nth-child(2)::before { content: "À privilégier"; }
   .post-content .food-table td:nth-child(3)::before { content: "À limiter"; }
 }
+
+/* Cholesterol normal-ranges table (neutral, no eat-more/eat-less colouring) */
+.post-content .lipid-table td:nth-child(2) { font-weight: 600; }
+@media (max-width: 600px) {
+  .post-content .lipid-table td:nth-child(2)::before { content: "Valeur normale"; }
+  .post-content .lipid-table td:nth-child(3)::before { content: "Ce que cela signifie"; }
+}

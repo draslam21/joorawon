@@ -490,3 +490,10 @@ main.index h1 {
   .post-content .food-table td:nth-child(2)::before { content: "What to eat more of"; }
   .post-content .food-table td:nth-child(3)::before { content: "What to eat less of"; }
 }
+
+/* Cholesterol normal-ranges table (neutral, no eat-more/eat-less colouring) */
+.post-content .lipid-table td:nth-child(2) { font-weight: 600; }
+@media (max-width: 600px) {
+  .post-content .lipid-table td:nth-child(2)::before { content: "Normal range"; }
+  .post-content .lipid-table td:nth-child(3)::before { content: "What it means"; }
+}
