@@ -497,3 +497,9 @@ main.index h1 {
   .post-content .lipid-table td:nth-child(2)::before { content: "Normal range"; }
   .post-content .lipid-table td:nth-child(3)::before { content: "What it means"; }
 }
+
+/* Link to the LDL calculator */
+.post-content .calc-box { margin: 1.2em 0; padding: 14px 16px; background: #fff; border: 1px solid var(--paper-deep); border-left: 4px solid var(--teal-mid); border-radius: var(--radius); }
+.post-content .calc-box p { margin: 0 0 .7em; }
+.post-content .calc-btn { display: inline-block; padding: 10px 18px; background: var(--teal-deep); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
+.post-content .calc-btn:hover { background: var(--teal-mid); }

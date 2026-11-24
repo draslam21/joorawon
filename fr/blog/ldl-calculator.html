@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R1J0EZHHS2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R1J0EZHHS2');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur du cholestérol LDL | Dr Joorawon Aslam</title>
+<meta name="description" content="Calculateur gratuit du cholestérol LDL : saisissez votre cholestérol total, votre HDL et vos triglycérides pour estimer votre LDL (formule de Friedewald) en mmol/L ou g/L.">
+<link rel="canonical" href="https://draslam21.github.io/joorawon/fr/blog/ldl-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16241F;--ink-soft:#3E4C46;--paper:#E8ECE3;--paper-deep:#DCE2D6;--teal-deep:#123B3A;--teal-mid:#2B6E68;--brass:#B4823C;--brass-dark:#8f6529;--radius:10px;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Work Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+.wrap{max-width:480px;margin:0 auto;padding:18px 16px 28px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:10px}
+.top a{color:var(--teal-mid);text-decoration:none;font-weight:600}
+h1{font-family:'Fraunces',serif;color:var(--teal-deep);font-size:1.55rem;line-height:1.2;margin:.2em 0 .3em}
+.lead{margin:0 0 16px;color:var(--ink-soft);font-size:.95rem}
+.card{background:#fff;border:1px solid var(--paper-deep);border-radius:var(--radius);padding:16px}
+.units{display:flex;gap:0;margin-bottom:14px;border:1px solid var(--teal-deep);border-radius:8px;overflow:hidden}
+.units button{flex:1;padding:9px 6px;font:600 .95rem 'Work Sans',sans-serif;border:0;background:#fff;color:var(--teal-deep);cursor:pointer}
+.units button[aria-pressed="true"]{background:var(--teal-deep);color:#fff}
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:4px}
+.field label small{font-weight:400;color:var(--ink-soft)}
+.inp{display:flex;align-items:center;border:1px solid #b9c3b8;border-radius:8px;background:#fff;overflow:hidden}
+.inp:focus-within{border-color:var(--teal-mid);box-shadow:0 0 0 3px rgba(43,110,104,.18)}
+.inp input{flex:1;min-width:0;border:0;outline:0;padding:11px 12px;font-size:16px;font-family:inherit;background:transparent}
+.inp span{padding:0 12px;color:var(--ink-soft);font-size:.85rem;white-space:nowrap}
+.actions{display:flex;gap:10px;margin-top:6px}
+.btn{flex:1;padding:11px;border-radius:8px;border:1px solid var(--teal-deep);font:600 1rem 'Work Sans',sans-serif;cursor:pointer}
+.btn.primary{background:var(--teal-deep);color:#fff}
+.btn.ghost{background:#fff;color:var(--teal-deep);max-width:110px}
+#out{margin-top:14px}
+.msg{padding:12px 14px;border-radius:8px;font-size:.92rem;background:#f6efe3;border-left:4px solid var(--brass)}
+.msg.err{background:#f7e8e3;border-left-color:#b05a3c}
+.res{background:var(--teal-deep);color:#fff;border-radius:var(--radius);padding:16px;text-align:center}
+.res .lbl{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.res .big{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;line-height:1.15;margin:2px 0}
+.res .big small{font-size:1rem;font-weight:400;opacity:.85}
+.res .alt{opacity:.85;font-size:.95rem}
+.sub{display:flex;justify-content:space-between;padding:10px 4px 0;font-size:.92rem;color:var(--ink-soft)}
+.sub b{color:var(--ink)}
+.formula{margin:12px 0 0;font-size:.82rem;color:var(--ink-soft)}
+.note{margin-top:16px;font-size:.85rem;color:var(--ink-soft)}
+.note p{margin:0 0 .7em}
+.more{display:inline-block;margin-top:4px;color:var(--teal-mid);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>Dr. Joorawon Aslam</span><a href="../../blog/ldl-calculator.html">EN</a></div>
+  <h1>Calculateur du cholestérol LDL</h1>
+  <p class="lead">Saisissez les trois valeurs de votre bilan lipidique pour estimer votre cholestérol LDL (&laquo;&nbsp;mauvais&nbsp;&raquo; cholestérol).</p>
+
+  <div class="card">
+    <div class="units" role="group" aria-label="Unités">
+      <button type="button" id="u-mmol" aria-pressed="true">mmol/L</button>
+      <button type="button" id="u-mass" aria-pressed="false">g/L</button>
+    </div>
+    <div class="field"><label for="tc">Cholestérol total</label>
+      <div class="inp"><input id="tc" type="text" inputmode="decimal" autocomplete="off"><span class="un">mmol/L</span></div></div>
+    <div class="field"><label for="hdl">Cholestérol HDL</label>
+      <div class="inp"><input id="hdl" type="text" inputmode="decimal" autocomplete="off"><span class="un">mmol/L</span></div></div>
+    <div class="field"><label for="tg">Triglycérides</label>
+      <div class="inp"><input id="tg" type="text" inputmode="decimal" autocomplete="off"><span class="un">mmol/L</span></div></div>
+    <div class="actions">
+      <button type="button" class="btn primary" id="go">Calculer le LDL</button>
+      <button type="button" class="btn ghost" id="clr">Effacer</button>
+    </div>
+    <div id="out" aria-live="polite"></div>
+  </div>
+
+  <div class="note">
+    <p>Objectifs habituels : LDL inférieur à 3,0 mmol/L (1,15 g/L) en l'absence d'autre facteur de risque, et inférieur à 1,8 mmol/L (0,70 g/L) en cas de maladie cardiaque ou de diabète. Votre objectif personnel dépend de votre risque global.</p>
+    <p>Il s'agit d'une estimation, et non d'un diagnostic. Certains laboratoires mesurent directement le LDL, ce qui est plus précis, surtout lorsque les triglycérides sont élevés. Discutez toujours de vos résultats avec votre médecin.</p>
+    <a class="more" href="understanding-cholesterol-types-and-normal-ranges.html" target="_blank" rel="noopener">Lire le guide complet sur le cholestérol &rarr;</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG={massUnit:"g/L",k:0.3867,kt:0.8857,dec:2,tgMaxMmol:4.5,tgMaxMass:4.0,tgDiv:5,
+    sanityMmol:25};
+  var T={"dsep": ",", "incomplete": "Veuillez saisir votre cholestérol total, votre HDL et vos triglycérides.", "checkunit": "Ces valeurs semblent trop élevées pour des mmol/L. Vérifiez l'unité choisie.", "hdlhigh": "Le HDL ne peut pas être supérieur au cholestérol total. Veuillez vérifier vos valeurs.", "tghigh": "Avec des triglycérides de {max} ou plus, cette formule n'est pas fiable. Demandez à votre médecin ou à votre laboratoire un dosage direct du LDL.", "neg": "Le LDL calculé est nul ou négatif, ce qui n'est pas plausible. Veuillez vérifier vos valeurs.", "resl": "Cholestérol LDL estimé", "nonhdl": "Cholestérol non-HDL (total &minus; HDL)", "fmm": "Formule de Friedewald : LDL = cholestérol total &minus; HDL &minus; (triglycérides &divide; 2,2), en mmol/L.", "fmass": "Formule de Friedewald : LDL = cholestérol total &minus; HDL &minus; (triglycérides &divide; 5), en g/L."};
+  var unit="mmol";
+  function $(id){return document.getElementById(id)}
+  var tc=$("tc"),hdl=$("hdl"),tg=$("tg"),out=$("out");
+  function num(v){v=(v||"").replace(",",".").trim();var n=parseFloat(v);return isFinite(n)&&n>0?n:NaN}
+  function fmt(n,d){return n.toFixed(d).replace(".",T.dsep)}
+  function unitLabel(){return unit==="mmol"?"mmol/L":CFG.massUnit}
+  function setUnit(u){
+    if(u===unit)return;
+    var toMass=(u==="mass");
+    [[tc,CFG.k],[hdl,CFG.k],[tg,CFG.kt]].forEach(function(p){
+      var v=num(p[0].value);
+      if(!isNaN(v)){var r=toMass?v*p[1]:v/p[1];p[0].value=fmt(r,toMass?CFG.dec:2)}
+    });
+    unit=u;
+    $("u-mmol").setAttribute("aria-pressed",String(u==="mmol"));
+    $("u-mass").setAttribute("aria-pressed",String(u==="mass"));
+    Array.prototype.forEach.call(document.querySelectorAll(".un"),function(e){e.textContent=unitLabel()});
+    if(out.innerHTML)calc();
+  }
+  function msg(t,err){out.innerHTML='<div class="msg'+(err?' err':'')+'">'+t+'</div>'}
+  function calc(){
+    var a=num(tc.value),h=num(hdl.value),t=num(tg.value);
+    if(isNaN(a)||isNaN(h)||isNaN(t)){msg(T.incomplete,false);return}
+    var mm=unit==="mmol";
+    if(mm&&a>CFG.sanityMmol){msg(T.checkunit,true);return}
+    if(h>=a){msg(T.hdlhigh,true);return}
+    var tgMax=mm?CFG.tgMaxMmol:CFG.tgMaxMass;
+    if(t>=tgMax){msg(T.tghigh.replace("{max}",fmt(tgMax,mm?1:CFG.dec)+" "+unitLabel()),true);return}
+    var ldl=mm?a-h-t/2.2:a-h-t/CFG.tgDiv;
+    if(ldl<=0){msg(T.neg,true);return}
+    var non=a-h;
+    var main=fmt(ldl,mm?2:CFG.dec), alt=mm?fmt(ldl*CFG.k,CFG.dec)+" "+CFG.massUnit:fmt(ldl/CFG.k,2)+" mmol/L";
+    var ul=unitLabel();
+    out.innerHTML=
+      '<div class="res"><div class="lbl">'+T.resl+'</div><div class="big">'+main+' <small>'+ul+'</small></div><div class="alt">&asymp; '+alt+'</div></div>'+
+      '<div class="sub"><span>'+T.nonhdl+'</span><b>'+fmt(non,mm?2:CFG.dec)+' '+ul+'</b></div>'+
+      '<p class="formula">'+(mm?T.fmm:T.fmass)+'</p>';
+    if(window.gtag){try{gtag("event","ldl_calculator_used")}catch(e){}}
+  }
+  $("u-mmol").onclick=function(){setUnit("mmol")};
+  $("u-mass").onclick=function(){setUnit("mass")};
+  $("go").onclick=calc;
+  $("clr").onclick=function(){tc.value=hdl.value=tg.value="";out.innerHTML="";tc.focus()};
+  [tc,hdl,tg].forEach(function(e){e.addEventListener("keydown",function(ev){if(ev.key==="Enter"){ev.preventDefault();calc()}});
+    e.addEventListener("input",function(){if(out.innerHTML)calc()})});
+  $("u-mass").textContent=CFG.massUnit;
+})();
+</script>
+</body>
+</html>
